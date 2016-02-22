@@ -16,6 +16,7 @@
 	<sfs-server.jarPath>${main.rootDir}/misc/sfs2x_server/sfs2x.jar</sfs-server.jarPath>
 	<sfs-core.jarPath>${main.rootDir}/misc/sfs2x_server/sfs2x-core.jar</sfs-core.jarPath>
 	<smartfox.version>2.9.0</smartfox.version>
+	<slf4j-log4j12.version>1.7.9</slf4j-log4j12.version>
   </properties>
 
   <dependencies>
@@ -39,5 +40,10 @@
       <scope>system</scope>
       <systemPath>${sfs-core.jarPath}</systemPath>
     </dependency>
+	<dependency>
+	  <groupId>org.slf4j</groupId>
+	  <artifactId>slf4j-log4j12</artifactId>
+	  <version>${slf4j-log4j12.version}</version>
+	</dependency>
   </dependencies>
 </project>
