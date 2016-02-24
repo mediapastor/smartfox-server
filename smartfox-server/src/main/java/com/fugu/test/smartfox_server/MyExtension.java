@@ -10,7 +10,7 @@ public class MyExtension extends SFSExtension {
 		trace("Hello, this is my first SFS2X Extension!");
 		
 		// Add a new Request Handler
-		addRequestHandler("math", MathHandler.class);
+		addRequestHandler("math", MathMultiHandler.class);
 
 		// Add a new SFSEvent Handler
 	    addEventHandler(SFSEventType.USER_LOGIN, LoginEventHandler.class);
