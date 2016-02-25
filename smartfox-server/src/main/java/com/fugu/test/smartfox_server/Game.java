@@ -8,7 +8,8 @@ import com.fugu.test.smartfox_server.Util.Assert;
 
 public class Game {
 	
-	private List<String> word;	
+	private List<String> word;
+	private String wordToShow = "";
 	
 	private int guessCount;
 	private int guessCountLimit;
@@ -34,7 +35,7 @@ public class Game {
 		this.word = wordInList;		
 	}
 	
-	public String guess(String guess) {
+	public boolean guess(String guess) {
 		
 		Assert.isSingleChar(guess);
 		
@@ -44,9 +45,13 @@ public class Game {
 			this.guessesMissed.add(guess);
 		}
 		
-		if (this.guessesHit.size() == word.size()) {
+		this.wordToShow = showWord();
+		
+		// check player guess whole word or not
+		if (this.wordToShow.indexOf('*') == -1) {
 			this.isOver = true;
 			this.isWon = true;
+			System.out.println(this.wordToShow.indexOf('*'));
 		}
 		
 		this.guessCount++;
@@ -55,7 +60,7 @@ public class Game {
 			this.isOver = true;
 		}
 		
-		return showWord();
+		return isOver();
 	}
 	
 	/**
@@ -83,6 +88,15 @@ public class Game {
 	 */
 	public int getGuessCount() {
 		return this.guessCount;
+	}
+	
+	/**
+	 * Get word to be shown to player
+	 * 
+	 * @return word like "t**t" to help player next guess
+	 */
+	public String getWordToShwo() {
+		return this.wordToShow;
 	}
 	
 	/**
@@ -114,20 +128,21 @@ public class Game {
 	 */
 	private String showWord() {
 		
-		String wordToShow = "";
+		this.wordToShow = "";
 		
 		
 		for(String c : this.word) {
 
 			if(guessesHit.contains(c)) {
-				wordToShow += c;
+				this.wordToShow += c;
 			} else {
-				wordToShow += "*";
+				this.wordToShow += "*";
 			}			
 			
 		}
-
+		System.out.println(wordToShow);
 		return wordToShow;
+		
 	}
 	
 }

@@ -19,26 +19,68 @@ public class GameTest extends TestCase {
     	game.init("test");
     }
     
-    	
+    /**
+     * Show word status
+     */
     @Test
     public void testShowWrod() {        
-    	String wordShown = game.guess("t");
-    	wordShown = game.guess("s");
-    	assertEquals("failure - wordShow are not same", "t*st", wordShown);
+    	game.guess("t");
+    	game.guess("s");
+    	
+    	assertEquals("failure - wordShow are not same", "t*st", game.getWordToShwo());
     }
     
+    /**
+     * Test isWon status
+     */
     @Test
     public void testIsWon() {        
     	game.guess("t");
     	game.guess("e");
     	game.guess("s");
+    	
     	assertTrue("failure - isWon status is not true", game.isWon());
+    	assertTrue("failure - isOver status is not true", game.isOver());
     }
     
+    /**
+     * Test isWon status
+     */
     @Test
     public void testIsNotWon() {        
     	game.guess("t");
     	game.guess("e");
-    	assertFalse("failure - isWon status is not true", game.isWon());
+    	
+    	assertFalse("failure - isWon status is not false", game.isWon());
+    }
+    
+    /**
+     * Test game over status
+     */
+    @Test
+    public void testIsOver() {
+    	for(int i=0; i<10; i++) {
+    		game.guess("r");
+    	}
+    	assertTrue("failure - isOver status is not true", game.isOver());
+    }
+    
+    /**
+     * Test game over status
+     */
+    @Test
+    public void testIsNotOver() {
+    	for(int i=0; i<9; i++) {
+    		game.guess("r");
+    	}
+    	
+    	assertFalse("failure - isOver status is not false", game.isOver());
+    }
+    
+    @Test
+    public void testGuessCount() {
+    	game.guess("r");
+    	game.guess("r");
+    	assertEquals("failure - guess count is not qualt to 2", 2, game.getGuessCount());
     }
 }
