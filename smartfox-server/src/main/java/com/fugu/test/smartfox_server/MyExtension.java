@@ -7,8 +7,7 @@ public class MyExtension extends SFSExtension {
 	
 	@Override
 	public void init() {
-		trace("Hello, this is my first SFS2X Extension!");
-		
+
 		// Add a new Request Handler
 		addRequestHandler("math", MathMultiHandler.class);
 
@@ -18,7 +17,6 @@ public class MyExtension extends SFSExtension {
 	
 	@Override
 	public void destroy() {
-		// TODO Auto-generated method stub
 		super.destroy();
 	}
 

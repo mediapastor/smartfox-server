@@ -15,13 +15,13 @@ public class LoginEventHandler extends BaseServerEventHandler
         String username = (String) event.getParameter(SFSEventParam.LOGIN_NAME); 
         String cryptPassword = (String) event.getParameter(SFSEventParam.LOGIN_PASSWORD);
         ISession session = (ISession)event.getParameter(SFSEventParam.SESSION);
-        
-        ;
          
         if (username.equals("tim") && getApi().checkSecurePassword(session, "1234", cryptPassword)) {
         	System.out.printf("Login success with username %s and password %s.%n", username, cryptPassword);
         } else {
-        	throw new SFSLoginException("Access denied! Wrong username or password! username:" + username + " cryptPasswordStatus:" + getApi().checkSecurePassword(session, "1234", cryptPassword));
+        	throw new SFSLoginException("Access denied! Wrong username or password! username:" + username + 
+        			" cryptPasswordStatus:" + getApi().checkSecurePassword(session, "1234", cryptPassword)
+			);
         }
             
     }
