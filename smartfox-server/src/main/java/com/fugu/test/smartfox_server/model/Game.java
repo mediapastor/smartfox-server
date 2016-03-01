@@ -1,10 +1,12 @@
-package com.fugu.test.smartfox_server;
+package com.fugu.test.smartfox_server.model;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import com.fugu.test.smartfox_server.Util.Assert;
+import com.smartfoxserver.v2.entities.data.ISFSObject;
+import com.smartfoxserver.v2.entities.data.SFSObject;
 
 public class Game {
 	
@@ -143,6 +145,15 @@ public class Game {
 		System.out.println(wordToShow);
 		return wordToShow;
 		
+	}
+	
+	public static SFSObject toSFSObject(Game game) {
+		return SFSObject.newFromObject(game);
+	}
+	
+	public static Game fromSFSObject(ISFSObject sfsObject) {
+		Game game = new Game();
+		return game;
 	}
 	
 }

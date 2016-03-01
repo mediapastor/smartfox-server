@@ -1,6 +1,7 @@
 package com.fugu.test.smartfox_server;
 
 import com.fugu.test.smartfox_server.Util.Util;
+import com.fugu.test.smartfox_server.model.Game;
 import com.smartfoxserver.v2.extensions.SFSExtension;
 
 public class HangManExtension extends SFSExtension{

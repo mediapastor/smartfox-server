@@ -3,6 +3,8 @@ package com.fugu.test.smartfox_server;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.fugu.test.smartfox_server.model.Game;
+
 import junit.framework.TestCase;
 
 public class GameTest extends TestCase {

@@ -1,4 +1,4 @@
-package com.fugu.test.smartfox_server;
+package com.fugu.test.smartfox_server.model;
 
 import java.util.ArrayList;
 import java.util.Arrays;
