@@ -26,8 +26,10 @@ public class GameTest extends TestCase {
      */
     @Test
     public void testShowWrod() {        
-    	game.guess("t");
-    	game.guess("s");
+    	game.setGuess("t");
+    	game.guess();
+    	game.setGuess("s");
+    	game.guess();
     	
     	assertEquals("failure - wordShow are not same", "t*st", game.getWordToShwo());
     }
@@ -36,10 +38,13 @@ public class GameTest extends TestCase {
      * Test isWon status
      */
     @Test
-    public void testIsWon() {        
-    	game.guess("t");
-    	game.guess("e");
-    	game.guess("s");
+    public void testIsWon() {
+    	game.setGuess("t");
+    	game.guess();
+    	game.setGuess("e");
+    	game.guess();
+    	game.setGuess("s");
+    	game.guess();
     	
     	assertTrue("failure - isWon status is not true", game.isWon());
     	assertTrue("failure - isOver status is not true", game.isOver());
@@ -50,8 +55,10 @@ public class GameTest extends TestCase {
      */
     @Test
     public void testIsNotWon() {        
-    	game.guess("t");
-    	game.guess("e");
+    	game.setGuess("t");
+    	game.guess();
+    	game.setGuess("e");
+    	game.guess();
     	
     	assertFalse("failure - isWon status is not false", game.isWon());
     }
@@ -62,7 +69,8 @@ public class GameTest extends TestCase {
     @Test
     public void testIsOver() {
     	for(int i=0; i<10; i++) {
-    		game.guess("r");
+    		game.setGuess("r");
+    		game.guess();
     	}
     	assertTrue("failure - isOver status is not true", game.isOver());
     }
@@ -73,7 +81,8 @@ public class GameTest extends TestCase {
     @Test
     public void testIsNotOver() {
     	for(int i=0; i<9; i++) {
-    		game.guess("r");
+    		game.setGuess("r");
+    		game.guess();
     	}
     	
     	assertFalse("failure - isOver status is not false", game.isOver());
@@ -81,8 +90,10 @@ public class GameTest extends TestCase {
     
     @Test
     public void testGuessCount() {
-    	game.guess("r");
-    	game.guess("r");
+    	game.setGuess("r");
+    	game.guess();
+    	game.setGuess("t");
+    	game.guess();
     	assertEquals("failure - guess count is not qualt to 2", 2, game.getGuessCount());
     }
 }

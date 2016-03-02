@@ -1,4 +1,4 @@
-package com.fugu.test.smartfox_server;
+package com.fugu.test.smartfox_server.handler;
 
 import com.smartfoxserver.bitswarm.sessions.ISession;
 import com.smartfoxserver.v2.core.ISFSEvent;
@@ -7,9 +7,9 @@ import com.smartfoxserver.v2.exceptions.SFSException;
 import com.smartfoxserver.v2.exceptions.SFSLoginException;
 import com.smartfoxserver.v2.extensions.BaseServerEventHandler;
 
-public class LoginEventHandler extends BaseServerEventHandler
-{
-    @Override
+public class LoginHandler extends BaseServerEventHandler {
+
+	@Override
     public void handleServerEvent(ISFSEvent event) throws SFSException
     {
         String username = (String) event.getParameter(SFSEventParam.LOGIN_NAME); 
@@ -25,4 +25,5 @@ public class LoginEventHandler extends BaseServerEventHandler
         }
             
     }
+	
 }
