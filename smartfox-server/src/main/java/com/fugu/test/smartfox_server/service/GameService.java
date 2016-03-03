@@ -16,7 +16,7 @@ public class GameService {
 		return game;
 	}
 	
-	public Game play() {
+	public Game guess() {
 		game.guess();
 		return game;
 	}

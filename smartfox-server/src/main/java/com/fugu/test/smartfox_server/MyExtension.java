@@ -11,6 +11,7 @@ public class MyExtension extends SFSExtension {
 	public void init() {
 
 		// Add a new Request Handler
+		// addRequestHandler("game", GameMultiHandler.class);
 		addRequestHandler("game", GameHandler.class);
 
 		// Add a new SFSEvent Handler

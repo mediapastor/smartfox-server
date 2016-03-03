@@ -1,21 +1,15 @@
 package com.fugu.test.smartfox_server.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Transient;
-
 import com.fugu.test.smartfox_server.Util.Assert;
-import com.fugu.tim.hibernate_repository_pattern.db.Persistable;
 import com.smartfoxserver.v2.entities.data.ISFSObject;
 import com.smartfoxserver.v2.entities.data.SFSObject;
 
-@Entity
-public class Game implements Persistable {
+public class Game implements Serializable {
 	
 	private static final long serialVersionUID = 2419597583961520285L;
 
@@ -44,8 +38,6 @@ public class Game implements Persistable {
 	/**
 	 * @return the id
 	 */
-	@Id
-	@GeneratedValue
 	public int getId() {
 		return id;
 	}
@@ -101,7 +93,6 @@ public class Game implements Persistable {
 	/**
 	 * @return the guessesHit
 	 */
-	@Transient
 	public List<String> getGuessesHit() {
 		return guessesHit;
 	}
@@ -122,7 +113,6 @@ public class Game implements Persistable {
 	/**
 	 * @return the guessesMissed
 	 */
-	@Transient
 	public List<String> getGuessesMissed() {
 		return guessesMissed;
 	}
@@ -294,7 +284,7 @@ public class Game implements Persistable {
 	 * 
 	 * @return SFSObject 
 	 */
-	public SFSObject toSFSObject() {
+	public ISFSObject toSFSObject() {
 		
 		ISFSObject sfso = new SFSObject();
 		
@@ -306,7 +296,7 @@ public class Game implements Persistable {
 		sfso.putBool("isOver", isOver());
 		sfso.putBool("isWon", isWon());
 		
-		return SFSObject.newFromObject(this);
+		return sfso;
 	}
 	
 	/**
@@ -319,12 +309,25 @@ public class Game implements Persistable {
 		
 		Game game = new Game();
 		
+		System.out.println("wordToShow is : " + sfsObject.getUtfString("wordToShow"));
 		game.setWordToShow(sfsObject.getUtfString("wordToShow"));
+		
+		System.out.println("guess is : " + sfsObject.getUtfString("guess"));
 		game.setGuess(sfsObject.getUtfString("guess"));
-		game.setGuessesHit(new ArrayList<String>(sfsObject.getUtfStringArray("guessesHit")));
-		game.setGuessesMissed(new ArrayList<String>(sfsObject.getUtfStringArray("guessesHit")));
-		game.setGuessCount(sfsObject.getInt("guesscount"));
+		
+//		System.out.println("guessesHit is : " + sfsObject.getUtfString("guessesHit"));
+//		game.setGuessesHit(new ArrayList<String>(sfsObject.getUtfStringArray("guessesHit")));
+		
+//		System.out.println("guessesMissed is : " + sfsObject.getUtfString("guessesMissed"));
+//		game.setGuessesMissed(new ArrayList<String>(sfsObject.getUtfStringArray("guessesMissed")));
+		
+		System.out.println("guessCount is : " + sfsObject.getInt("guessCount"));
+		game.setGuessCount(sfsObject.getInt("guessCount"));
+		
+		System.out.println("isOver is : " + sfsObject.getUtfString("isOver"));
 		game.setOver(sfsObject.getBool("isOver"));
+		
+		System.out.println("isWon is : " + sfsObject.getUtfString("isWon"));
 		game.setWon(sfsObject.getBool("isWon"));
 		
 		return game;

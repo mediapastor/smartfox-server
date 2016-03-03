@@ -9,24 +9,25 @@ import com.smartfoxserver.v2.entities.data.ISFSObject;
 import com.smartfoxserver.v2.extensions.BaseClientRequestHandler;
 import com.smartfoxserver.v2.extensions.SFSExtension;
 
-public class GameHandler extends BaseClientRequestHandler {
+@MultiHandler
+public class GameMultiHandler extends BaseClientRequestHandler {
 	
 	/**
 	 * Base Client Request Handler
 	 */
 	@Override
 	public void handleClientRequest(User player, ISFSObject params) {
-		// String command = params.getUtfString(SFSExtension.MULTIHANDLER_REQUEST_ID);
-		System.out.println("params is : " + params.toString());
+		String command = params.getUtfString(SFSExtension.MULTIHANDLER_REQUEST_ID);
+		System.out.println("game." + command + " executed");
 		
-//		switch (command) {
-//		case "gameinit": 
-//			handleInit(player, params);
-//			break;
-//		case "gameguess": 
-//			handleGuess(player, params);
-//			break;
-//		}
+		switch (command) {
+		case "init": 
+			handleInit(player, params);
+			break;
+		case "guess": 
+			handleGuess(player, params);
+			break;
+		}
 		
 	}
 	
@@ -48,7 +49,7 @@ public class GameHandler extends BaseClientRequestHandler {
 		// send back response
 		ISFSObject response = initedGame.toSFSObject();
 		MyExtension parentEx = (MyExtension) getParentExtension();
-		parentEx.send("gameinit", response, player);
+		parentEx.send("game.init", response, player);
 	}
 	
 	/**
@@ -69,7 +70,7 @@ public class GameHandler extends BaseClientRequestHandler {
 		// send back response
 		ISFSObject response = playedGame.toSFSObject();
 		MyExtension parentEx = (MyExtension) getParentExtension();
-		parentEx.send("gameguess", response, player);
+		parentEx.send("game.guess", response, player);
 	}
 
 }
