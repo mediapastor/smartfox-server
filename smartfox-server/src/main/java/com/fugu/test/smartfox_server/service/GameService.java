@@ -12,7 +12,7 @@ public class GameService {
 	}
 	
 	public Game init() {
-		game.init(Word.getNewWord());
+		game.init("test");
 		return game;
 	}
 	

@@ -17,7 +17,7 @@ public class GameHandler extends BaseClientRequestHandler {
 	@Override
 	public void handleClientRequest(User player, ISFSObject params) {
 		// String command = params.getUtfString(SFSExtension.MULTIHANDLER_REQUEST_ID);
-		System.out.println("params is : " + params.toString());
+		trace("params is : " + params.toString());
 		
 //		switch (command) {
 //		case "gameinit": 

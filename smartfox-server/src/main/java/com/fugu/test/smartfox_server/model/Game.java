@@ -3,8 +3,10 @@ package com.fugu.test.smartfox_server.model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
+import com.fugu.test.smartfox_server.MyExtension;
 import com.fugu.test.smartfox_server.Util.Assert;
 import com.smartfoxserver.v2.entities.data.ISFSObject;
 import com.smartfoxserver.v2.entities.data.SFSObject;
@@ -33,8 +35,7 @@ public class Game implements Serializable {
 		this.guessesHit = new ArrayList<>();
 		this.guessesMissed = new ArrayList<>();
 	}
-	
-	
+		
 	/**
 	 * @return the id
 	 */
@@ -48,17 +49,13 @@ public class Game implements Serializable {
 	public void setId(int id) {
 		this.id = id;
 	}
-	
-	
+		
 	/**
 	 * @return the wordToShow
 	 */
 	public String getWordToShow() {
 		return wordToShow;
 	}
-
-
-
 
 	/**
 	 * @param wordToShow the wordToShow to set
@@ -67,18 +64,12 @@ public class Game implements Serializable {
 		this.wordToShow = wordToShow;
 	}
 
-
-
-
 	/**
 	 * @return the guess
 	 */
 	public String getGuess() {
 		return guess;
 	}
-
-
-
 
 	/**
 	 * @param guess the guess to set
@@ -87,18 +78,12 @@ public class Game implements Serializable {
 		this.guess = guess;
 	}
 
-
-
-
 	/**
 	 * @return the guessesHit
 	 */
 	public List<String> getGuessesHit() {
 		return guessesHit;
 	}
-
-
-
 
 	/**
 	 * @param guessesHit the guessesHit to set
@@ -107,18 +92,12 @@ public class Game implements Serializable {
 		this.guessesHit = guessesHit;
 	}
 
-
-
-
 	/**
 	 * @return the guessesMissed
 	 */
 	public List<String> getGuessesMissed() {
 		return guessesMissed;
 	}
-
-
-
 
 	/**
 	 * @param guessesMissed the guessesMissed to set
@@ -127,18 +106,12 @@ public class Game implements Serializable {
 		this.guessesMissed = guessesMissed;
 	}
 
-
-
-
 	/**
 	 * @param guessCount the guessCount to set
 	 */
 	public void setGuessCount(int guessCount) {
 		this.guessCount = guessCount;
 	}
-
-
-
 
 	/**
 	 * @param isOver the isOver to set
@@ -147,17 +120,12 @@ public class Game implements Serializable {
 		this.isOver = isOver;
 	}
 
-
-
-
 	/**
 	 * @param isWon the isWon to set
 	 */
 	public void setWon(boolean isWon) {
 		this.isWon = isWon;
 	}
-
-
 
 	public void init(String str) {
 		
@@ -167,16 +135,14 @@ public class Game implements Serializable {
 		this.word = wordInList;
 	}
 	
-	
-	
 	public boolean guess() {
 		
-		Assert.isSingleChar(this.guess);
+		Assert.isSingleChar(guess);
 		
 		if (match(guess)) {
-			this.guessesHit.add(guess);
+			guessesHit.add(guess);
 		} else {
-			this.guessesMissed.add(guess);
+			guessesMissed.add(guess);
 		}
 		
 		this.wordToShow = showWord();
@@ -315,19 +281,20 @@ public class Game implements Serializable {
 		System.out.println("guess is : " + sfsObject.getUtfString("guess"));
 		game.setGuess(sfsObject.getUtfString("guess"));
 		
-//		System.out.println("guessesHit is : " + sfsObject.getUtfString("guessesHit"));
-//		game.setGuessesHit(new ArrayList<String>(sfsObject.getUtfStringArray("guessesHit")));
+		System.out.println("guessesHit is : " + sfsObject.getUtfStringArray("guessesHit").toString());
+		Collection<String> guessesHitCollection = sfsObject.getUtfStringArray("guessesHit");
+		game.setGuessesHit(new ArrayList<String>(guessesHitCollection));
 		
-//		System.out.println("guessesMissed is : " + sfsObject.getUtfString("guessesMissed"));
-//		game.setGuessesMissed(new ArrayList<String>(sfsObject.getUtfStringArray("guessesMissed")));
+		System.out.println("guessesMissed is : " + sfsObject.getUtfStringArray("guessesMissed").toString());
+		game.setGuessesMissed(new ArrayList<String>(sfsObject.getUtfStringArray("guessesMissed")));
 		
 		System.out.println("guessCount is : " + sfsObject.getInt("guessCount"));
 		game.setGuessCount(sfsObject.getInt("guessCount"));
 		
-		System.out.println("isOver is : " + sfsObject.getUtfString("isOver"));
+		System.out.println("isOver is : " + sfsObject.getBool("isOver"));
 		game.setOver(sfsObject.getBool("isOver"));
 		
-		System.out.println("isWon is : " + sfsObject.getUtfString("isWon"));
+		System.out.println("isWon is : " + sfsObject.getBool("isWon"));
 		game.setWon(sfsObject.getBool("isWon"));
 		
 		return game;

@@ -18,13 +18,19 @@ public class GameMultiHandler extends BaseClientRequestHandler {
 	@Override
 	public void handleClientRequest(User player, ISFSObject params) {
 		String command = params.getUtfString(SFSExtension.MULTIHANDLER_REQUEST_ID);
-		System.out.println("game." + command + " executed");
+		
+//		trace("[GameMultiHandler] SFSObject isWon is : " + params.getBool("isWon").toString());
+//		trace("[GameMultiHandler] SFSObject guess is : " + params.getUtfString("guess").toString());
+//		trace("[GameMultiHandler] SFSObject guessesHit is : " + params.getUtfStringArray("guessesHit").toString());
+		trace("[GameMultiHandler] command is : " + command);
 		
 		switch (command) {
 		case "init": 
+			trace("[GameMultiHandler] init command executed : " + command);
 			handleInit(player, params);
 			break;
 		case "guess": 
+			trace("[GameMultiHandler] guess command executed : " + command);
 			handleGuess(player, params);
 			break;
 		}
@@ -38,6 +44,8 @@ public class GameMultiHandler extends BaseClientRequestHandler {
 	 * @param params
 	 */
 	private void handleInit(User player, ISFSObject params) {
+		trace("[GameMultiHandler] handleInit executed : ");
+		
 		// get request from SFSObject
 		Game game = Game.fromSFSObject(params);
 		
@@ -59,12 +67,15 @@ public class GameMultiHandler extends BaseClientRequestHandler {
 	 * @param params
 	 */
 	private void handleGuess(User player, ISFSObject params) {
+		trace("[GameMultiHandler] handleGuess executed : ");
+		
 		// get request from SFSObject
 		Game game = Game.fromSFSObject(params);
 		
 		// Application logic
 		GameService service = new GameService(game);
-		Game playedGame = service.guess();
+		Game playedGame = service.init();
+		playedGame = service.guess();
 		
 		// instantiate response SFSObject
 		// send back response
